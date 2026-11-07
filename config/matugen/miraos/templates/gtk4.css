@@ -1,0 +1,61 @@
+:root {
+  --window-bg-color: {{role.background}};
+  --window-fg-color: {{role.foreground}};
+  --view-bg-color: {{role.background}};
+  --view-fg-color: {{role.foreground}};
+  --headerbar-bg-color: {{role.surface}};
+  --headerbar-fg-color: {{role.foreground}};
+  --headerbar-backdrop-color: {{role.surface}};
+  --headerbar-shade-color: rgba(0, 0, 0, 0.15);
+  --sidebar-bg-color: {{role.surface}};
+  --sidebar-fg-color: {{role.foreground}};
+  --sidebar-backdrop-color: {{role.surface}};
+  --secondary-sidebar-bg-color: {{role.surface_variant}};
+  --secondary-sidebar-fg-color: {{role.foreground}};
+  --card-bg-color: {{role.surface_variant}};
+  --card-fg-color: {{role.foreground}};
+  --dialog-bg-color: {{role.surface}};
+  --dialog-fg-color: {{role.foreground}};
+  --popover-bg-color: {{role.surface}};
+  --popover-fg-color: {{role.foreground}};
+  --thumbnail-bg-color: {{role.background}};
+  --thumbnail-fg-color: {{role.foreground}};
+  --accent-bg-color: {{role.accent}};
+  --accent-fg-color: {{role.accent_foreground}};
+  --accent-color: {{role.accent}};
+  --error-bg-color: {{role.error}};
+  --error-fg-color: {{role.accent_foreground}};
+  --error-color: {{role.error}};
+  --shade-color: rgba(0, 0, 0, 0.18);
+}
+@define-color theme_bg_color {{role.background}};
+@define-color theme_fg_color {{role.foreground}};
+@define-color theme_base_color {{role.background}};
+@define-color theme_text_color {{role.foreground}};
+@define-color theme_selected_bg_color {{role.accent}};
+@define-color theme_selected_fg_color {{role.accent_foreground}};
+@define-color accent_bg_color {{role.accent}};
+@define-color accent_fg_color {{role.accent_foreground}};
+@define-color accent_color {{role.accent}};
+@define-color window_bg_color {{role.background}};
+@define-color window_fg_color {{role.foreground}};
+@define-color view_bg_color {{role.background}};
+@define-color view_fg_color {{role.foreground}};
+@define-color headerbar_bg_color {{role.surface}};
+@define-color headerbar_fg_color {{role.foreground}};
+@define-color popover_bg_color {{role.surface}};
+@define-color popover_fg_color {{role.foreground}};
+@define-color borders {{role.outline}};
+window.background { background-color: {{role.background}}; color: {{role.foreground}}; }
+headerbar { background-color: {{role.surface}}; color: {{role.foreground}}; box-shadow: none; }
+button:not(.flat):not(.suggested-action):not(.destructive-action) { background-color: {{role.surface_variant}}; background-image: none; color: {{role.foreground}}; border-radius: 12px; }
+button:hover:not(.suggested-action):not(.destructive-action) { background-color: {{role.surface_hover}}; }
+button:checked:not(.suggested-action) { background-color: {{role.selection_muted}}; }
+entry { background-color: {{role.surface}}; color: {{role.foreground}}; border-radius: 12px; }
+entry:focus-within { outline-color: {{role.accent}}; }
+selection, row:selected { background-color: {{role.accent}}; color: {{role.accent_foreground}}; }
+popover > contents { background-color: {{role.surface}}; color: {{role.foreground}}; border-radius: 14px; }
+check:checked, check:indeterminate, radio:checked, switch:checked { background-color: {{role.accent}}; color: {{role.accent_foreground}}; }
+scale highlight, progressbar progress { background-color: {{role.accent}}; }
+notebook tab:checked { box-shadow: inset 0 -2px {{role.accent}}; }
+scrollbar slider { background-color: {{role.surface_hover}}; border-radius: 6px; }

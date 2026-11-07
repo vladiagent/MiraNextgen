@@ -1,0 +1,54 @@
+:root {
+  --window-bg-color: #282828;
+  --window-fg-color: #ebdbb2;
+  --view-bg-color: #282828;
+  --view-fg-color: #ebdbb2;
+  --headerbar-bg-color: #32302f;
+  --headerbar-fg-color: #ebdbb2;
+  --headerbar-backdrop-color: #32302f;
+  --headerbar-shade-color: rgba(0, 0, 0, 0.15);
+  --sidebar-bg-color: #32302f;
+  --sidebar-fg-color: #ebdbb2;
+  --sidebar-backdrop-color: #32302f;
+  --secondary-sidebar-bg-color: #3c3836;
+  --secondary-sidebar-fg-color: #ebdbb2;
+  --card-bg-color: #3c3836;
+  --card-fg-color: #ebdbb2;
+  --dialog-bg-color: #32302f;
+  --dialog-fg-color: #ebdbb2;
+  --popover-bg-color: #32302f;
+  --popover-fg-color: #ebdbb2;
+  --thumbnail-bg-color: #282828;
+  --thumbnail-fg-color: #ebdbb2;
+  --accent-fg-color: #282828;
+  --shade-color: rgba(0, 0, 0, 0.18);
+}
+@define-color theme_bg_color #282828;
+@define-color theme_fg_color #ebdbb2;
+@define-color theme_base_color #282828;
+@define-color theme_text_color #ebdbb2;
+@define-color theme_selected_bg_color @accent_bg_color;
+@define-color theme_selected_fg_color #282828;
+@define-color accent_fg_color #282828;
+@define-color window_bg_color #282828;
+@define-color window_fg_color #ebdbb2;
+@define-color view_bg_color #282828;
+@define-color view_fg_color #ebdbb2;
+@define-color headerbar_bg_color #32302f;
+@define-color headerbar_fg_color #ebdbb2;
+@define-color popover_bg_color #32302f;
+@define-color popover_fg_color #ebdbb2;
+@define-color borders #665c54;
+window.background { background-color: #282828; color: #ebdbb2; }
+headerbar { background-color: #32302f; color: #ebdbb2; box-shadow: none; }
+button:not(.flat):not(.suggested-action):not(.destructive-action) { background-color: #3c3836; background-image: none; color: #ebdbb2; border-radius: 12px; }
+button:hover:not(.suggested-action):not(.destructive-action) { background-color: #504945; }
+button:checked:not(.suggested-action) { background-color: alpha(@accent_bg_color, 0.23); }
+entry { background-color: #32302f; color: #ebdbb2; border-radius: 12px; }
+entry:focus-within { outline-color: @accent_bg_color; }
+selection, row:selected { background-color: @accent_bg_color; color: #282828; }
+popover > contents { background-color: #32302f; color: #ebdbb2; border-radius: 14px; }
+check:checked, check:indeterminate, radio:checked, switch:checked { background-color: @accent_bg_color; color: #282828; }
+scale highlight, progressbar progress { background-color: @accent_bg_color; }
+notebook tab:checked { box-shadow: inset 0 -2px @accent_bg_color; }
+scrollbar slider { background-color: #504945; border-radius: 6px; }

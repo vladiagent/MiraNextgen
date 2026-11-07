@@ -1,0 +1,17 @@
+{
+  "background": "#282828",
+  "surface": "#32302f",
+  "surface_variant": "#3c3836",
+  "surface_hover": "#504945",
+  "foreground": "#ebdbb2",
+  "foreground_muted": "#a89984",
+  "outline": "#665c54",
+  "accent_foreground": "#282828",
+  "accent": "{{colors.primary.dark.hex}}",
+  "accent_secondary": "{{colors.secondary.dark.hex}}",
+  "accent_tertiary": "{{colors.tertiary.dark.hex}}",
+  "accent_bright": "{{colors.primary_fixed.dark.hex}}",
+  "accent_secondary_bright": "{{colors.secondary_fixed.dark.hex}}",
+  "accent_tertiary_bright": "{{colors.tertiary_fixed.dark.hex}}",
+  "error": "{{colors.error.dark.hex}}"
+}

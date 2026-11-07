@@ -1,0 +1,52 @@
+@define-color theme_bg_color {{role.background}};
+@define-color theme_fg_color {{role.foreground}};
+@define-color theme_base_color {{role.background}};
+@define-color theme_text_color {{role.foreground}};
+@define-color theme_selected_bg_color {{role.accent}};
+@define-color theme_selected_fg_color {{role.accent_foreground}};
+@define-color theme_unfocused_bg_color {{role.background}};
+@define-color theme_unfocused_fg_color {{role.foreground_muted}};
+@define-color theme_unfocused_base_color {{role.background}};
+@define-color theme_unfocused_text_color {{role.foreground_muted}};
+@define-color theme_unfocused_selected_bg_color {{role.selection_muted}};
+@define-color theme_unfocused_selected_fg_color {{role.foreground}};
+@define-color insensitive_bg_color {{role.surface}};
+@define-color insensitive_fg_color {{role.foreground_muted}};
+@define-color insensitive_base_color {{role.surface}};
+@define-color borders {{role.outline}};
+@define-color unfocused_borders {{role.surface_hover}};
+@define-color accent_color {{role.accent}};
+@define-color accent_bg_color {{role.accent}};
+@define-color accent_fg_color {{role.accent_foreground}};
+@define-color error_color {{role.error}};
+
+window.background, .background { background-color: @theme_bg_color; color: @theme_fg_color; }
+headerbar, .titlebar, toolbar { background-color: {{role.surface}}; background-image: none; color: @theme_fg_color; box-shadow: none; }
+.view, treeview.view, iconview, textview text { background-color: @theme_base_color; color: @theme_text_color; }
+button { background-color: {{role.surface_variant}}; background-image: none; color: @theme_fg_color; border: 1px solid {{role.outline}}; border-radius: 12px; box-shadow: none; text-shadow: none; transition: background-color 150ms ease, border-color 150ms ease; }
+button:hover { background-color: {{role.surface_hover}}; }
+button:active, button:checked { background-color: {{role.selection_muted}}; border-color: @accent_bg_color; }
+button:focus, entry:focus { border-color: @accent_bg_color; }
+button.suggested-action { background-color: @accent_bg_color; color: @accent_fg_color; }
+entry, spinbutton { background-color: {{role.surface}}; color: @theme_fg_color; border: 1px solid {{role.outline}}; border-radius: 12px; box-shadow: none; }
+entry selection, textview text selection, selection, row:selected, treeview.view:selected, iconview:selected { background-color: @accent_bg_color; color: @accent_fg_color; }
+menu, popover, tooltip { background-color: {{role.surface}}; color: @theme_fg_color; border: 1px solid {{role.outline}}; border-radius: 14px; }
+menuitem:hover, modelbutton:hover, row:hover { background-color: {{role.surface_variant}}; }
+check, radio { background-color: {{role.surface_variant}}; border: 1px solid {{role.foreground_muted}}; color: @accent_fg_color; }
+check { border-radius: 4px; }
+radio { border-radius: 50%; }
+check:checked, check:indeterminate, radio:checked, switch:checked { background-color: @accent_bg_color; background-image: none; border-color: @accent_bg_color; color: @accent_fg_color; box-shadow: none; }
+switch { background-color: {{role.surface_hover}}; border-radius: 14px; }
+switch slider { background-color: @theme_fg_color; background-image: none; border: 1px solid @borders; border-radius: 50%; box-shadow: none; }
+switch:checked slider { border-color: @accent_bg_color; }
+scale trough, progressbar trough { background-color: {{role.surface_hover}}; border-radius: 4px; }
+scale highlight, progressbar progress { background-color: @accent_bg_color; border-color: @accent_bg_color; border-radius: 4px; }
+scale slider { background-color: @accent_bg_color; border-color: @accent_bg_color; border-radius: 50%; }
+notebook header { background-color: {{role.surface}}; }
+notebook tab:checked { background-color: {{role.surface_variant}}; box-shadow: inset 0 -2px @accent_bg_color; }
+scrollbar { background-color: transparent; }
+scrollbar slider { background-color: {{role.surface_hover}}; border-radius: 6px; }
+scrollbar slider:hover { background-color: {{role.foreground_muted}}; }
+separator { background-color: {{role.surface_hover}}; }
+*:disabled { color: {{role.foreground_muted}}; }
+*:link, .link { color: {{role.accent_tertiary}}; }

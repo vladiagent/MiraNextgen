@@ -1,0 +1,52 @@
+@define-color theme_bg_color #282828;
+@define-color theme_fg_color #ebdbb2;
+@define-color theme_base_color #282828;
+@define-color theme_text_color #ebdbb2;
+@define-color theme_selected_bg_color #ffb3af;
+@define-color theme_selected_fg_color #282828;
+@define-color theme_unfocused_bg_color #282828;
+@define-color theme_unfocused_fg_color #a89984;
+@define-color theme_unfocused_base_color #282828;
+@define-color theme_unfocused_text_color #a89984;
+@define-color theme_unfocused_selected_bg_color #594847;
+@define-color theme_unfocused_selected_fg_color #ebdbb2;
+@define-color insensitive_bg_color #32302f;
+@define-color insensitive_fg_color #a89984;
+@define-color insensitive_base_color #32302f;
+@define-color borders #665c54;
+@define-color unfocused_borders #504945;
+@define-color accent_color #ffb3af;
+@define-color accent_bg_color #ffb3af;
+@define-color accent_fg_color #282828;
+@define-color error_color #ffb4ab;
+
+window.background, .background { background-color: @theme_bg_color; color: @theme_fg_color; }
+headerbar, .titlebar, toolbar { background-color: #32302f; background-image: none; color: @theme_fg_color; box-shadow: none; }
+.view, treeview.view, iconview, textview text { background-color: @theme_base_color; color: @theme_text_color; }
+button { background-color: #3c3836; background-image: none; color: @theme_fg_color; border: 1px solid #665c54; border-radius: 12px; box-shadow: none; text-shadow: none; transition: background-color 150ms ease, border-color 150ms ease; }
+button:hover { background-color: #504945; }
+button:active, button:checked { background-color: #594847; border-color: @accent_bg_color; }
+button:focus, entry:focus { border-color: @accent_bg_color; }
+button.suggested-action { background-color: @accent_bg_color; color: @accent_fg_color; }
+entry, spinbutton { background-color: #32302f; color: @theme_fg_color; border: 1px solid #665c54; border-radius: 12px; box-shadow: none; }
+entry selection, textview text selection, selection, row:selected, treeview.view:selected, iconview:selected { background-color: @accent_bg_color; color: @accent_fg_color; }
+menu, popover, tooltip { background-color: #32302f; color: @theme_fg_color; border: 1px solid #665c54; border-radius: 14px; }
+menuitem:hover, modelbutton:hover, row:hover { background-color: #3c3836; }
+check, radio { background-color: #3c3836; border: 1px solid #a89984; color: @accent_fg_color; }
+check { border-radius: 4px; }
+radio { border-radius: 50%; }
+check:checked, check:indeterminate, radio:checked, switch:checked { background-color: @accent_bg_color; background-image: none; border-color: @accent_bg_color; color: @accent_fg_color; box-shadow: none; }
+switch { background-color: #504945; border-radius: 14px; }
+switch slider { background-color: @theme_fg_color; background-image: none; border: 1px solid @borders; border-radius: 50%; box-shadow: none; }
+switch:checked slider { border-color: @accent_bg_color; }
+scale trough, progressbar trough { background-color: #504945; border-radius: 4px; }
+scale highlight, progressbar progress { background-color: @accent_bg_color; border-color: @accent_bg_color; border-radius: 4px; }
+scale slider { background-color: @accent_bg_color; border-color: @accent_bg_color; border-radius: 50%; }
+notebook header { background-color: #32302f; }
+notebook tab:checked { background-color: #3c3836; box-shadow: inset 0 -2px @accent_bg_color; }
+scrollbar { background-color: transparent; }
+scrollbar slider { background-color: #504945; border-radius: 6px; }
+scrollbar slider:hover { background-color: #a89984; }
+separator { background-color: #504945; }
+*:disabled { color: #a89984; }
+*:link, .link { color: #e2c28c; }

@@ -1,0 +1,10 @@
+[Unit]
+Description=Generate MiraOS wallpaper colors
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/miraos-wallpaper-theme
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target

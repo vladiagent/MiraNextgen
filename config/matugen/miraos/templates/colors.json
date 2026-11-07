@@ -1,0 +1,6 @@
+{
+  "primary": "{{role.accent}}",
+  "tertiary": "{{role.accent_tertiary}}",
+  "on_surface": "{{role.foreground}}",
+  "on_surface_variant": "{{role.foreground_muted}}"
+}

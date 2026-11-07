@@ -1,0 +1,9 @@
+[Unit]
+Description=Watch the selected MiraOS wallpaper
+
+[Path]
+PathChanged=%h/.config/waypaper/config.ini
+Unit=miraos-wallpaper-theme.service
+
+[Install]
+WantedBy=default.target

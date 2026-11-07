@@ -1,0 +1,20 @@
+{
+  "background": "#282828",
+  "surface": "#32302f",
+  "surface_variant": "#3c3836",
+  "surface_hover": "#504945",
+  "foreground": "#ebdbb2",
+  "foreground_muted": "#a89984",
+  "outline": "#665c54",
+  "accent_foreground": "#282828",
+  "accent": "#ffb3af",
+  "accent_secondary": "#e7bdba",
+  "accent_tertiary": "#e2c28c",
+  "accent_bright": "#ffdad7",
+  "accent_secondary_bright": "#ffdad7",
+  "accent_tertiary_bright": "#ffdea8",
+  "error": "#ffb4ab",
+  "selection_muted": "#594847",
+  "accent_hover": "#fcb9af",
+  "warning": "#e7bdba"
+}

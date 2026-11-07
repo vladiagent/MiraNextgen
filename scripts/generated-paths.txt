@@ -1,0 +1,12 @@
+.config/Kvantum/vladi-dots/vladi-dots.kvconfig
+.config/Kvantum/vladi-dots/vladi-dots.svg
+.config/gtk-3.0/vladi-colors.css
+.config/gtk-4.0/vladi-colors.css
+.config/kdeglobals
+.config/kitty/colors/matugen.conf
+.config/matugen/miraos/generated/hyprland.lua
+.config/matugen/miraos/generated/palette.json
+.config/quickshell/colors.json
+.config/starship.toml
+.config/waypaper/config.ini
+.local/share/color-schemes/vladi-dots.colors

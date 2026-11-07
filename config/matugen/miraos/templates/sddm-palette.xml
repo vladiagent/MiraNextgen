@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme><palette>
+  <background>{{role.background}}</background>
+  <surface>{{role.background}}</surface>
+  <surface_variant>{{role.surface_variant}}</surface_variant>
+  <primary>{{role.accent}}</primary>
+  <secondary>{{role.accent_secondary}}</secondary>
+  <tertiary>{{role.accent_tertiary}}</tertiary>
+  <on_surface>{{role.foreground}}</on_surface>
+  <on_surface_variant>{{role.foreground_muted}}</on_surface_variant>
+  <error>{{role.error}}</error>
+  <warning>{{role.accent_tertiary}}</warning>
+</palette></theme>

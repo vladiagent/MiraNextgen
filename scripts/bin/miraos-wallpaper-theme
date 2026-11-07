@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+import configparser
+import fcntl
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import tomllib
+
+sys.dont_write_bytecode = True
+home = Path.home()
+sys.path.insert(0, str(home / '.local/share/vladi-theme'))
+import vladi_theme as ui
+config = home / '.config/matugen/miraos'
+state = home / '.local/state/miraos-wallpaper-theme'
+state.mkdir(parents=True, mode=0o700, exist_ok=True)
+
+def atomic_write(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as tmp:
+        tmp.write(data)
+        temp = Path(tmp.name)
+    temp.chmod(0o644)
+    temp.replace(path)
+
+def sync_sddm(wallpaper):
+    helper = home / '.local/share/vladi-sddm/publish.py'
+    destination = Path('/var/lib/miraos-dots/sddm')
+    if not destination.is_dir() or destination.stat().st_uid != os.getuid():
+        return
+    palette = home / '.local/state/vladi-sddm/palette.xml'
+    result = subprocess.run([sys.executable, '-B', str(helper), '--wallpaper', str(wallpaper),
+                             '--palette', str(palette), '--destination', str(destination)], capture_output=True, text=True, timeout=45)
+    if result.returncode:
+        print('SDDM sync: ' + result.stderr.strip(), file=sys.stderr)
+
+def apply_hyprland():
+    if os.environ.get('HYPRLAND_INSTANCE_SIGNATURE'):
+        result = subprocess.run(
+            ['hyprctl', 'eval', 'dofile(' + json.dumps(str(config / 'generated/hyprland.lua')) + ')'],
+            capture_output=True, text=True, timeout=10)
+        if result.returncode:
+            print('Hyprland border reload: ' + result.stderr.strip(), file=sys.stderr)
+
+with (state / 'lock').open('w') as lock:
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    settings = configparser.ConfigParser(interpolation=None)
+    settings.read(home / '.config/waypaper/config.ini')
+    wallpaper = Path(settings.get('Settings', 'wallpaper', fallback='')).expanduser()
+    if not wallpaper.is_file():
+        ui.refresh(home, config)
+        sys.exit(0)
+    wallpaper = wallpaper.resolve(strict=True)
+    outputs = {
+        'colors.json': home / '.config/quickshell/colors.json',
+        'hyprland.lua': config / 'generated/hyprland.lua',
+        'kitty.conf': home / '.config/kitty/colors/matugen.conf',
+        'starship.toml': home / '.config/starship.toml',
+        'sddm-palette.xml': home / '.local/state/vladi-sddm/palette.xml',
+    }
+    outputs.update(ui.output_paths(home, config))
+    signature = hashlib.sha256()
+    signature.update(str(wallpaper).encode())
+    signature.update(str((wallpaper.stat().st_mtime_ns, wallpaper.stat().st_size)).encode())
+    for name in outputs:
+        signature.update((config / 'templates' / name).read_bytes())
+    signature.update(b'vladi-fixed-gruvbox-semantic-v1')
+    signature.update(Path(ui.__file__).read_bytes())
+    signature.update((Path(ui.__file__).parent / 'live_refresh.py').read_bytes())
+    signature.update((Path(ui.__file__).parent / 'neutrals.json').read_bytes())
+    stamp = state / 'last.json'
+    try:
+        previous = json.loads(stamp.read_text())
+    except (OSError, ValueError):
+        previous = {}
+    if '--force' not in sys.argv and previous.get('signature') == signature.hexdigest() and all(
+        dest.is_file() and hashlib.sha256(dest.read_bytes()).hexdigest() == previous.get('outputs', {}).get(name)
+        for name, dest in outputs.items()
+    ):
+        ui.refresh(home, config)
+        sync_sddm(wallpaper)
+        apply_hyprland()
+        print('Wallpaper palette is already current.')
+        sys.exit(0)
+    with tempfile.TemporaryDirectory(prefix='generate-', dir=state) as tempdir:
+        temp = Path(tempdir)
+        lines = [
+            '[config]',
+            '',
+            '[templates.semantic]',
+            'input_path = ' + json.dumps(str(config / 'templates/semantic.json')),
+            'output_path = ' + json.dumps(str(temp / 'semantic.json')),
+            '',
+        ]
+        generated_config = temp / 'config.toml'
+        generated_config.write_text('\n'.join(lines))
+        subprocess.run(['matugen', '-c', str(generated_config),
+                        'image', str(wallpaper), '--source-color-index', '0', '-m', 'dark'],
+                       check=True, timeout=90)
+        roles = ui.palette((temp / 'semantic.json').read_bytes())
+        rendered = {name: (json.dumps(roles, indent=2) + '\n').encode() if name == 'semantic.json' else ui.render((config / 'templates' / name).read_text(), roles) for name in outputs}
+        ui.validate(rendered, temp)
+        for name, data in rendered.items():
+            if not data or b'{{colors.' in data:
+                raise RuntimeError(f'Matugen did not fully render {name}')
+        json.loads(rendered['colors.json'])
+        tomllib.loads(rendered['starship.toml'].decode())
+        for name, dest in outputs.items():
+            if not dest.exists() or dest.read_bytes() != rendered[name]:
+                atomic_write(dest, rendered[name])
+        atomic_write(stamp, (json.dumps({'wallpaper': str(wallpaper), 'signature': signature.hexdigest(),
+                     'outputs': {name: hashlib.sha256(data).hexdigest() for name, data in rendered.items()}}, indent=2)+'\n').encode())
+    ui.refresh(home, config)
+    sync_sddm(wallpaper)
+    apply_hyprland()
+    print(f'Applied wallpaper colors: {wallpaper.name}')

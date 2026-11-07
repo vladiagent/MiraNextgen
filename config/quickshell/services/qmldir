@@ -1,0 +1,9 @@
+singleton MediaService 1.0 MediaService.qml
+singleton NotificationService 1.0 NotificationService.qml
+
+singleton LauncherApps 1.0 LauncherApps.qml
+
+singleton HyprlandWindows 1.0 HyprlandWindows.qml
+
+singleton AudioService 1.0 AudioService.qml
+singleton ClipboardService 1.0 ClipboardService.qml

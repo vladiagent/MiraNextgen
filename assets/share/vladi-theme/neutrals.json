@@ -1,0 +1,10 @@
+{
+  "background": "#282828",
+  "surface": "#32302f",
+  "surface_variant": "#3c3836",
+  "surface_hover": "#504945",
+  "foreground": "#ebdbb2",
+  "foreground_muted": "#a89984",
+  "outline": "#665c54",
+  "accent_foreground": "#282828"
+}
